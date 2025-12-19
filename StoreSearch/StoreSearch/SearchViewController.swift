@@ -16,12 +16,15 @@ class SearchViewController: UIViewController {
     // MARK: - Variables
     var searchResults = [SearchResult]()
     var hasSearched = false
+    var cellIdentifier = "SearchResultCell"
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.contentInset = UIEdgeInsets(top: 51, left: 0, bottom: 0, right: 0)
+        let cellNib = UINib(nibName: "SearchResultCell", bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
     }
 }
 
@@ -29,7 +32,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchResults = []
-        for i in 0...2 {
+        for _ in 0...2 {
             let searchResult = SearchResult()
             searchResult.artistName = searchBar.text!
             searchResults.append(searchResult)
@@ -53,8 +56,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = "SearchResultCell"
-        var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
         if searchResults.count == 0 {
             cell?.textLabel!.text = "(Nothing Found)"
             cell?.detailTextLabel!.text = ""
