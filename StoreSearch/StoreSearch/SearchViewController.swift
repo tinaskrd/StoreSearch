@@ -9,6 +9,11 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
+    struct TableView {
+        struct CellIdentifiers {
+            static let searchResultCell = "SearchResultCell"
+        }
+    }
     // MARK: - IBOutlets
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -65,7 +70,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             cell.nameLabel.text = searchResult.artistName
             cell.artistNameLabel.text = searchResult.artistName
         }
-        return cell 
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
