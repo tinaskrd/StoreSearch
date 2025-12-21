@@ -21,7 +21,7 @@ class SearchViewController: UIViewController {
     // MARK: - Variables
     var searchResults = [SearchResult]()
     var hasSearched = false
-    var cellIdentifier = "SearchResultCell"
+    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -29,7 +29,7 @@ class SearchViewController: UIViewController {
         // Do any additional setup after loading the view.
         tableView.contentInset = UIEdgeInsets(top: 51, left: 0, bottom: 0, right: 0)
         let cellNib = UINib(nibName: "SearchResultCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
+        tableView.register(cellNib, forCellReuseIdentifier: TableView.CellIdentifiers.searchResultCell)
     }
 }
 
@@ -61,7 +61,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! SearchResultCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TableView.CellIdentifiers.searchResultCell) as! SearchResultCell
         if searchResults.count == 0 {
             cell.nameLabel.text = "(Nothing Found)"
             cell.artistNameLabel.text = ""
